@@ -2,8 +2,6 @@ package com.shahin.assignmentinfomvvm.ui.activity.details
 
 
 import android.os.Bundle
-
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
@@ -22,17 +20,18 @@ import butterknife.ButterKnife
  */
 class DetailsActivity : AppCompatActivity() {
 
-    @BindView(R.id.image)
     internal var image: AppCompatImageView? = null
-    @BindView(R.id.title)
     internal var title: TextView? = null
-    @BindView(R.id.desc)
     internal var desc: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        ButterKnife.bind(this)
+
+
+        image = findViewById(R.id.image) as AppCompatImageView
+        title = findViewById(R.id.title) as TextView
+        desc = findViewById(R.id.desc) as TextView
 
         val viewModel = createViewModel()
 
@@ -49,9 +48,9 @@ class DetailsActivity : AppCompatActivity() {
         override fun onChanged(userData: UserData?) {
             if (userData == null) return
 
-            title!!.text = userData.title
-            desc!!.text = userData.description
-            Glide.with(applicationContext).load(userData.image).into(image!!)
+            title?.text = userData.title
+            desc?.text = userData.description
+            image?.let { Glide.with(applicationContext).load(userData.image).into(it) }
         }
     }
 

@@ -15,8 +15,6 @@ import com.shahin.assignmentinfomvvm.data.network.model.UserData
 
 import java.util.ArrayList
 
-import butterknife.BindView
-import butterknife.ButterKnife
 
 /**
  * Created by Shahin on 17/11/2019.
@@ -63,28 +61,31 @@ class UserAdapter(private val mListener: OnMovieAdapter) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-
-        @BindView(R.id.image)
         internal var image: AppCompatImageView? = null
-        @BindView(R.id.title)
         internal var title: TextView? = null
-        @BindView(R.id.desc)
         internal var desc: TextView? = null
 
+
         init {
-            ButterKnife.bind(this, itemView)
+
+            title = itemView.findViewById(R.id.title) as TextView
+            desc = itemView.findViewById(R.id.desc) as TextView
+            image = itemView.findViewById(R.id.image) as AppCompatImageView
+
         }
 
         fun setTitle(title: String?) {
-            this.title!!.text = title
+
+            this.title?.text= title
+
         }
 
         fun setImage(imageUrl: String?) {
-            Glide.with(itemView.context).load(imageUrl).into(image!!)
+            image?.let { Glide.with(itemView.context).load(imageUrl).into(it) }
         }
 
         fun setDescription(description: String) {
-            desc!!.text = description
+            this.desc?.text  =  description
         }
 
         fun setOnClickListener(userData: UserData) {

@@ -13,15 +13,15 @@ import com.shahin.assignmentinfomvvm.utils.AppConstants
 class UserData : Parcelable {
 
     @Expose
-    @SerializedName(AppConstants.DESC)
+    @SerializedName("description")
     var description: String? = null
 
     @Expose
-    @SerializedName(AppConstants.IMAGE_HREF)
+    @SerializedName("imageHref")
     var image: String? = null
 
     @Expose
-    @SerializedName(AppConstants.TITLE)
+    @SerializedName("title")
     var title: String? = null
 
     protected constructor(`in`: Parcel) {

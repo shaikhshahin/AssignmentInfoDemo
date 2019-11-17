@@ -1,6 +1,5 @@
 package com.shahin.assignmentinfomvvm.ui.activity.main
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnMovieAdapter {
 
     internal lateinit var movieAdapter: UserAdapter
 
-    @BindView(R.id.recycler_view)
     internal var recyclerView: RecyclerView? = null
 
     @BindView(R.id.progress_bar)
@@ -41,27 +39,21 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnMovieAdapter {
     internal lateinit var viewModel: MainViewModel
 
 
-
     private fun createViewModel(): MainViewModel {
         val factory = MainViewModelFactory(DataManager.instance.userService)
         return ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
     }
 
-    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
-        
 
 
+        recyclerView = findViewById(R.id.recycler_view) as RecyclerView
 
-        movieAdapter = UserAdapter(this)
 
-        recyclerView?.adapter = movieAdapter
-
-        
-
+        recyclerView?.layoutManager = LinearLayoutManager(this)
 
 
         viewModel = createViewModel()
@@ -70,6 +62,11 @@ class MainActivity : AppCompatActivity(), UserAdapter.OnMovieAdapter {
         viewModel.userDatas.observe(this, MovieObserver())
 
         viewModel.loadUserDatasNetwork()
+
+        movieAdapter = UserAdapter(this)
+
+        recyclerView?.adapter = movieAdapter
+
 
     }
 
