@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="row_title_color">#26267F</color>
-    <color name="row_color_bg">#d3d3d3</color>
+    <color name="row_color_bg">#E9E9E9</color>
+    <color name="layout_color_bg">#ffff</color>
 </resources>
